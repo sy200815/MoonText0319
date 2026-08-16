@@ -5548,7 +5548,7 @@
 			    min-height: 0;
 			    overflow-y: auto;
 			    -webkit-overflow-scrolling: touch;
-			    padding-bottom: calc(env(safe-area-inset-bottom) + 96px);
+			    padding-bottom: calc(env(safe-area-inset-bottom) + 24px);
 			}
 			.imem-largetitle {
 			    padding: 2px 20px 4px;
@@ -6256,7 +6256,7 @@
 			}
 
 			.tm-container {
-			    padding: calc(env(safe-area-inset-top) + 20px) 24px 120px 24px;
+			    padding: calc(env(safe-area-inset-top) + 20px) 24px calc(env(safe-area-inset-bottom) + 30px) 24px;
 			    background: #FFFFFF;
 			    min-height: 100%;
 			    display: flex;
@@ -6695,7 +6695,7 @@
 			.settings-view .settings-content {
 			    flex: 1;
 			    overflow-y: auto;
-			    padding: 16px 0 120px 0 !important;
+			    padding: 16px 0 calc(env(safe-area-inset-bottom) + 24px) 0 !important;
 			    display: flex;
 			    flex-direction: column;
 			    align-items: center;
@@ -6943,7 +6943,7 @@
 			    display: grid;
 			    grid-template-columns: 1fr 1fr;
 			    gap: 28px 16px;
-			    padding: 0 24px 120px 24px;
+			    padding: 0 24px calc(env(safe-area-inset-bottom) + 24px) 24px;
 			}
 			.avatar-lib-card {
 			    display: flex;
@@ -9863,7 +9863,7 @@
 			/* ===== 韩系画报风格朋友圈页面样式 ===== */
 			.moments-page {
 			    background-color: #ffffff !important;
-			    padding: 0 0 120px 0 !important;
+			    padding: 0 0 calc(env(safe-area-inset-bottom) + 24px) 0 !important;
 			    position: relative;
 			    height: 0;
 			    min-height: 0;
@@ -10880,7 +10880,7 @@
 			/* ===== 一比一复刻日系画报「我」页面样式 ===== */
 			.profile-page {
 			    background-color: #FFFFFF !important;
-			    padding: 20px 20px 140px 20px !important;
+			    padding: 20px 20px calc(env(safe-area-inset-bottom) + 30px) 20px !important;
 			    display: flex;
 			    flex-direction: column;
 			    height: 100%;
@@ -11259,14 +11259,12 @@
 
 			/* 针对特定设置页建立局部安全缩放区，彻底解决全局偏移bug */
 			.wb-scale-wrapper {
-			    width: 105.26% !important;
-			    height: 105.26% !important;
-			    transform: scale(0.95);
-			    transform-origin: top left;
+			    width: 100% !important;
+			    height: 100% !important;
+			    transform: none !important;
 			    display: flex;
 			    flex-direction: column;
-			    overflow-y: auto;
-			    -webkit-overflow-scrolling: touch;
+			    overflow: hidden;
 			}
 
 			/* 旁白模式设定视图 */
@@ -11775,7 +11773,7 @@
 			    background-color: #FFFFFF !important;
 			}
 			.wb-container {
-			    padding: 0 24px 280px 24px; /* 增加底部内边距，确保可以滑到最底部看完整条目 */
+			    padding: 0 24px calc(env(safe-area-inset-bottom) + 30px) 24px;
 			    background: #FFFFFF;
 			    min-height: 100%;
 			    display: flex;
@@ -12449,7 +12447,7 @@
 			}
 			#view-chat_settings .settings-content, #view-group_chat_settings .settings-content {
 			    background: #F2F2F7 !important;
-			    padding: 0 0 40px 0 !important;
+			    padding: 0 0 calc(env(safe-area-inset-bottom) + 24px) 0 !important;
 			    align-items: stretch !important;
 			    gap: 0 !important;
 			}
@@ -20783,7 +20781,7 @@
 
 			.modern-settings-content {
 			    background: #FFFFFF;
-			    padding: calc(env(safe-area-inset-top) + 60px) 0 120px 0;
+			    padding: calc(env(safe-area-inset-top) + 60px) 0 calc(env(safe-area-inset-bottom) + 24px) 0;
 			    flex: 1;
 			    overflow-y: auto;
 			    -webkit-overflow-scrolling: touch;
@@ -21984,7 +21982,7 @@
 			    flex-direction: column;
 			    align-items: stretch;
 			    justify-content: flex-start;
-			    padding: 0 20px 120px 20px !important;
+			    padding: 0 20px calc(env(safe-area-inset-bottom) + 24px) 20px !important;
 			}
 
 			/* 资产卡片整体间隙与立体阴影 */
@@ -36343,6 +36341,30 @@ ABSOLUTE RULE — NO TIME PREFIX in any reply.`
 			                }
 
 
+			            // ── 核心切歌指令拦截与清洗（在拆解气泡前彻底剔除，绝不流入消息流） ──
+			            const switchSongRegex = /[\[【\(\（]\s*切歌\s*[:：]\s*(?:《|“|"|')?\s*(.+?)\s*(?:》|”|"|')?\s*[\]】\)\）]/gi;
+			            let songToSwitch = null;
+			            reply = reply.replace(switchSongRegex, (match, rawSongName) => {
+			                if (!songToSwitch && rawSongName) {
+			                    songToSwitch = rawSongName.replace(/[《》"“'”\[\]【】\(\)\（\）]/g, '').trim();
+			                }
+			                return ''; // 从文本中彻底移除
+			            }).trim();
+
+			            if (songToSwitch) {
+			                const pool = getFilteredMusicList();
+			                let target = pool.find(s => s.name.trim().toLowerCase() === songToSwitch.toLowerCase());
+			                if (!target) target = pool.find(s => s.name.includes(songToSwitch) || songToSwitch.includes(s.name));
+			                if (!target) {
+			                    const kw = songToSwitch.split(/\s*-\s*/).pop().trim();
+			                    if (kw) target = pool.find(s => s.name.includes(kw));
+			                }
+			                if (target) {
+			                    playMusic(target.id);
+			                    showToast(`${contact.alias || contact.name} 切到了《${target.name}》`);
+			                }
+			            }
+
 			            // 解析拉黑相关指令
 			            if (reply.includes('[拉黑用户]')) {
 			                contact.isBlockedByRole = true;
@@ -36563,6 +36585,14 @@ ABSOLUTE RULE — NO TIME PREFIX in any reply.`
 			            // 收到消息后，重置主动发消息定时器
 			            startAutoReplyTimer(contact.id);
 
+			            // 自动清理可能残留在历史消息里的切歌系统指令气泡（修复旧消息）
+			            contact.messages = contact.messages.filter(m => {
+			                if (m.role === 'assistant' && typeof m.content === 'string') {
+			                    return !/^[\[【\(\（]\s*切歌\s*[:：].+?[\]】\)\）]$/i.test(m.content.trim());
+			                }
+			                return true;
+			            });
+
 			                        // 尝试触发角色主动发朋友圈
 			            setTimeout(() => tryTriggerRoleMoment(contact), 3000);
 
@@ -36647,7 +36677,10 @@ ABSOLUTE RULE — NO TIME PREFIX in any reply.`
 			    // 4. 移除 AI 常见的自我介绍前缀
 			    replyText = replyText.replace(/^(助手|AI|assistant|回复|回答|Answer|Response)\s*[:：]\s*/gim, '');
 
-			    // 5. 清理多余的空行
+			    // 5. 再次强力清除任何残留的切歌指令
+			    replyText = replyText.replace(/[\[【\(\（]\s*切歌\s*[:：]\s*(?:《|“|"|')?\s*.+?\s*(?:》|”|"|')?\s*[\]】\)\）]/gi, '');
+
+			    // 6. 清理多余的空行
 			    replyText = replyText.replace(/\n{3,}/g, '\n\n');
 
 			    // 6. 核心拦截：强力剔除 AI 脑补的 “角色名: ” 或 “我: ” 前缀，防止单条气泡中自导自演
@@ -52194,51 +52227,20 @@ ${NEW_CHARACTER_VOICE_PROMPT}
 			function handleTogetherSongSwitch(contact) {
 			    if (!contact || !contact.messages || contact.messages.length === 0) return;
 
-			    // 只检查最近 6 条 assistant 消息
-			    const recent = contact.messages.slice(-6);
-			    const regex = /[\[【]\s*切歌\s*[:：]\s*(.+?)\s*[\]】]/;
-
-			    for (let i = recent.length - 1; i >= 0; i--) {
-			        const m = recent[i];
-			        if (m.role !== 'assistant' || m._tlSwitchDone) continue;
-			        if (!m.content || typeof m.content !== 'string') continue;
-
-			        const match = m.content.match(regex);
-			        if (!match) continue;
-
-			        const raw = match[1].replace(/[《》"'"]/g, '').trim();
-			        m._tlSwitchDone = true;
-			        // 从气泡里清掉指令文本
-			        m.content = m.content.replace(regex, '').trim();
-
-			        const pool = getFilteredMusicList();
-			        let target = pool.find(s => s.name === raw);
-			        if (!target) target = pool.find(s => s.name.includes(raw) || raw.includes(s.name));
-			        if (!target) {
-			            const kw = raw.split(/\s*-\s*/).pop().trim();
-			            if (kw) target = pool.find(s => s.name.includes(kw));
+			    // 自动清理可能残留在历史消息里的切歌系统指令气泡
+			    const beforeLen = contact.messages.length;
+			    contact.messages = contact.messages.filter(m => {
+			        if (m.role === 'assistant' && typeof m.content === 'string') {
+			            return !/^[\[【\(\（]\s*切歌\s*[:：].+?[\]】\)\）]$/i.test(m.content.trim());
 			        }
+			        return true;
+			    });
 
-			        // 如果这条消息被清空了，直接移除该气泡
-			        if (!m.content) {
-			            contact.messages = contact.messages.filter(x => x.id !== m.id);
-			        }
-
-			        if (target && (!state.currentPlayingMusic || target.id !== state.currentPlayingMusic.id)) {
-			            saveDataSilently();
-			            showToast(`${contact.alias || contact.name} 切到了《${target.name}》`);
-			            playMusic(target.id);
-			            if (state.currentView === 'chat_room' && state.activeContactId === contact.id) {
-			                renderChatRoom();
-			            }
-			            return;
-			        }
-
+			    if (contact.messages.length !== beforeLen) {
 			        saveDataSilently();
 			        if (state.currentView === 'chat_room' && state.activeContactId === contact.id) {
 			            renderChatRoom();
 			        }
-			        return;
 			    }
 			}
 
