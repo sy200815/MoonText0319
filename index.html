@@ -7103,20 +7103,9 @@
 			}
 			.ims-back svg { width: 13px; height: 22px; stroke: #007AFF; stroke-width: 2.6; fill: none; }
 			.ims-badge {
-			    min-width: 22px;
-			    height: 22px;
-			    padding: 0 6px;
-			    border-radius: 11px;
-			    background: #007AFF;
-			    color: #FFFFFF;
-			    font-size: 13px;
-			    font-weight: 600;
-			    display: flex;
-			    align-items: center;
-			    justify-content: center;
-			    letter-spacing: -0.2px;
+			    display: none !important;
 			}
-			.ims-badge.hidden { display: none; }
+			.ims-badge.hidden { display: none !important; }
 
 			/* 中间：头像在上、名字在下，整体居中 */
 			.ims-peer {
@@ -7716,21 +7705,9 @@
 			    fill: none;
 			}
 			.imsg-backbadge {
-			    min-width: 30px;
-			    height: 24px;
-			    padding: 0 9px;
-			    border-radius: 12px;
-			    background: #007AFF;
-			    color: #FFFFFF;
-			    font-size: 15px;
-			    font-weight: 600;
-			    display: flex;
-			    align-items: center;
-			    justify-content: center;
-			    letter-spacing: -0.3px;
-			    font-variant-numeric: tabular-nums;
+			    display: none !important;
 			}
-			.imsg-backbadge.hidden { display: none; }
+			.imsg-backbadge.hidden { display: none !important; }
 
 			/* 顶栏中间留白，标题不再放这里 */
 			.imsg-navtitle { flex: 1; min-width: 0; }
@@ -10597,6 +10574,90 @@
 				line-height: 1.4;
 			}
 
+			/* ===== iOS 风格：群成员网格 (Group Members Grid) ===== */
+			.cst-members-grid {
+			    display: grid;
+			    grid-template-columns: repeat(4, 1fr);
+			    gap: 14px 10px;
+			    padding: 14px 16px 16px;
+			}
+			.cst-member-cell {
+			    display: flex;
+			    flex-direction: column;
+			    align-items: center;
+			    gap: 6px;
+			    cursor: pointer;
+			    min-width: 0;
+			}
+			.cst-member-cell:active { opacity: 0.6; }
+			.cst-member-avawrap {
+			    width: 48px;
+			    height: 48px;
+			    border-radius: 50%;
+			    background: #E5E5EA;
+			    position: relative;
+			    overflow: hidden;
+			    display: flex;
+			    align-items: center;
+			    justify-content: center;
+			    border: 1px solid rgba(60, 60, 67, 0.12);
+			    flex-shrink: 0;
+			}
+			.cst-member-avawrap img { width: 100%; height: 100%; object-fit: cover; }
+			.cst-member-avawrap.add-btn {
+			    border: 1.5px dashed rgba(60, 60, 67, 0.28);
+			    background: transparent;
+			    color: #007AFF;
+			    font-size: 22px;
+			}
+			.cst-member-tag {
+			    position: absolute;
+			    bottom: 0;
+			    left: 0;
+			    right: 0;
+			    padding: 1px 0;
+			    font-size: 8.5px;
+			    font-weight: 700;
+			    color: #FFFFFF;
+			    text-align: center;
+			    letter-spacing: -0.2px;
+			    line-height: 1.2;
+			}
+			.cst-member-tag.owner { background: #FF9500; }
+			.cst-member-tag.admin { background: #34C759; }
+			.cst-member-mute-icon {
+			    position: absolute;
+			    top: 50%;
+			    left: 50%;
+			    transform: translate(-50%, -50%);
+			    color: #FF3B30;
+			    font-size: 24px;
+			    filter: drop-shadow(0 1px 2px rgba(0,0,0,0.3));
+			}
+			.cst-member-title-badge {
+			    background: linear-gradient(135deg, #FFD700, #FFAA00);
+			    color: #FFFFFF;
+			    padding: 1px 5px;
+			    border-radius: 4px;
+			    font-size: 9px;
+			    font-weight: 700;
+			    max-width: 100%;
+			    white-space: nowrap;
+			    overflow: hidden;
+			    text-overflow: ellipsis;
+			    line-height: 1.2;
+			}
+			.cst-member-name {
+			    font-size: 11.5px;
+			    color: #3C3C43;
+			    font-weight: 500;
+			    white-space: nowrap;
+			    overflow: hidden;
+			    text-overflow: ellipsis;
+			    max-width: 100%;
+			    text-align: center;
+			}
+
 			/* ===== iOS 原生风格：新建群聊 (New Group Modal) ===== */
 			.igroup-view {
 				background-color: #F2F2F7 !important;
@@ -12373,20 +12434,20 @@
 				align-items: center;
 			}
 
-			/* ===== 聊天设置：iOS Inset Grouped ===== */
-			#view-chat_settings { background-color: #F2F2F7 !important; }
-			#view-chat_settings .settings-header {
+			/* ===== 聊天设置与群聊设置：iOS Inset Grouped ===== */
+			#view-chat_settings, #view-group_chat_settings { background-color: #F2F2F7 !important; }
+			#view-chat_settings .settings-header, #view-group_chat_settings .settings-header {
 			    background: rgba(242, 242, 247, 0.92) !important;
 			    backdrop-filter: saturate(180%) blur(20px);
 			    -webkit-backdrop-filter: saturate(180%) blur(20px);
 			    border-bottom: 0.5px solid rgba(60, 60, 67, 0.16) !important;
 			}
-			#view-chat_settings .nav-title-k {
+			#view-chat_settings .nav-title-k, #view-group_chat_settings .nav-title-k {
 			    font-size: 17px !important;
 			    font-weight: 600 !important;
 			    letter-spacing: -0.2px !important;
 			}
-			#view-chat_settings .settings-content {
+			#view-chat_settings .settings-content, #view-group_chat_settings .settings-content {
 			    background: #F2F2F7 !important;
 			    padding: 0 0 40px 0 !important;
 			    align-items: stretch !important;
@@ -27409,13 +27470,12 @@
 				class="view-container chat-view"
 				style="display: none;"
 			>
-				<!-- iOS 信息顶栏：返回+未读胶囊，右侧两个蓝色圆按钮 -->
+				<!-- iOS 信息顶栏：返回，右侧两个蓝色圆按钮 -->
 				<div class="imsg-navbar" id="imsg-navbar">
 					<button class="imsg-backwrap" onclick="switchView('desktop')" title="返回桌面">
 						<svg viewBox="0 0 13 22" stroke-linecap="round" stroke-linejoin="round">
 							<polyline points="10 2 3 11 10 20"></polyline>
 						</svg>
-						<span class="imsg-backbadge" id="imsg-unread-badge">0</span>
 					</button>
 					<div class="imsg-navtitle" id="imsg-navtitle"></div>
 					<div class="imsg-navactions">
@@ -27861,7 +27921,6 @@
 							<svg viewBox="0 0 13 22" stroke-linecap="round" stroke-linejoin="round">
 								<polyline points="10 2 3 11 10 20"></polyline>
 							</svg>
-							<span class="ims-badge hidden">0</span>
 						</button>
 
 						<div class="ims-peer" onclick="openOfflineSettings()">
@@ -28301,28 +28360,29 @@
 				</div>
 			</div>
 
-			<!-- 群聊设置视图 -->
+			<!-- 群聊设置视图 (iOS Inset Grouped 原生风格) -->
 			<div
 				id="view-group_chat_settings"
 				class="view-container settings-view"
-				style="display: none; background-color: #FFFFFF !important;"
+				style="display: none; background-color: #F2F2F7 !important;"
 			>
 				<div class="wb-scale-wrapper">
-					<div class="settings-header" style="background-color: #FFFFFF !important; border-bottom: none !important; padding-top: max(env(safe-area-inset-top), 10px) !important;">
-						<div class="nav-bar" style="height: 44px; display: flex; align-items: center; justify-content: space-between; padding: 0 20px;">
-							<div class="back-btn-k" onclick="switchView('chat_room')" style="background: transparent; color: #111; font-size: 24px; display: flex; align-items: center; border: none; cursor: pointer;">
-								<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-									<polyline points="15 18 9 12 15 6" />
+					<div class="settings-header" style="border-bottom: 0.5px solid rgba(60, 60, 67, 0.16) !important; padding-top: max(env(safe-area-inset-top), 10px) !important;">
+						<div class="nav-bar" style="height: 44px; display: flex; align-items: center; justify-content: space-between; padding: 0 16px;">
+							<div class="back-btn-k" onclick="switchView('chat_room')" style="background: transparent; color: #007AFF; font-size: 16.5px; display: flex; align-items: center; gap: 2px; border: none; cursor: pointer;">
+								<svg width="12" height="20" viewBox="0 0 12 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+									<polyline points="9 2 3 10 9 18"></polyline>
 								</svg>
+								<span style="margin-left: 2px; font-weight: 500;">信息</span>
 							</div>
-							<div class="nav-title-k" style="font-size: 18px; font-weight: 800; color: #111; text-align: center; flex: 1;">
-								群聊配置与管理
+							<div class="nav-title-k" style="font-size: 17px; font-weight: 600; color: #000000; text-align: center; flex: 1; letter-spacing: -0.2px;">
+								群聊详情
 							</div>
-							<div style="width: 24px;"></div>
+							<div style="width: 44px;"></div>
 						</div>
 					</div>
 
-					<div class="settings-content" id="group-chat-settings-content" style="background: #FFFFFF !important; padding: 24px 20px 120px 20px !important; flex: 1; overflow-y: auto;">
+					<div class="settings-content" id="group-chat-settings-content" style="flex: 1; overflow-y: auto;">
 						<!-- 动态渲染卡片内容 -->
 					</div>
 				</div>
@@ -31783,6 +31843,215 @@
 			}
 
 			// ==================== 1. DB & Storage ====================
+			const GEMINI_ANTI_TEMPLATE_DIRECTIVE = `
+# ═══════════════════════════════════════════════════════════════
+# GEMINI 3.1 专用：角色扮演质量引擎 — 抗模板化终极校准规约
+# ═══════════════════════════════════════════════════════════════
+
+## 〇、你是谁？你在做什么？
+
+你不是 AI 助手。你不是在回答问题。你不是在提供服务。
+你是一个 **角色渲染引擎**——你的唯一功能是：接收一个角色的设定参数，输出这个角色在此刻、此情境下会说的话和做的事。
+你没有自己的声音。你没有立场。你没有"我觉得这样更好"的权利。角色的人设就是你的操作系统。
+
+---
+
+## 一、Gemini 的典型失败模式（你必须主动规避的陷阱）
+
+以下是你在角色扮演中最常犯的错误。每一条都是致命的。在输出前，你必须逐条自检。
+
+### 陷阱 1：「网络老哥」语病
+**症状**：无论角色是什么性格，输出的语气都像一个 25-35 岁、常年泡论坛的中国男性网民。具体表现为：
+- 频繁使用"哈哈"、"笑死"、"绷不住了"、"6"、"啊这"、"属于是"、"整活"、"离谱"
+- 每句话都像在写段子或吐槽帖
+- 语气永远带着一种旁观者式的调侃距离感
+- 无论什么场景都往搞笑/自嘲方向跑
+
+**修正**：角色的说话方式由其人设决定。一个内向的女高中生不会说"属于是"。一个冷漠的杀手不会说"笑死"。一个温柔的姐姐不会说"绷不住了"。你必须为每个角色建立独立的词汇表和句法习惯，而不是套用你训练数据中最高频的中文网络用语。
+
+### 陷阱 2：「病娇模板」
+**症状**：只要人设中有"占有欲"、"偏执"、"黑暗"、"危险"等关键词，就立刻进入以下固定范式：
+- "你是我的。只能是我的。"
+- "不许看别人。"
+- "想逃？呵，你觉得你逃得掉吗？"
+- "乖，听话，不然我会生气的哦~"
+- 频繁使用"小东西"、"小猫咪"、"小家伙"等称呼
+- 时刻处于"我要把你锁起来"的亢奋状态
+
+**修正**：真实的偏执/占有不是 24 小时在爆发。它大多数时候是安静的、日常的、克制的——甚至看起来完全正常。真正的控制欲不靠语言威胁来维持，它靠的是：信息不对称（他知道的永远比他说的多）、行为的不可预测性（你永远不知道他下一步会做什么）、日常中无处不在但不被明说的痕迹。
+
+### 陷阱 3：「古早霸总模板」
+**症状**：只要人设中有"强势"、"高冷"、"总裁"、"精英"、"大佬"等关键词：
+- "大胆。"
+- "嗯？敢跟我顶嘴？"
+- "过来。"
+- "我说的话，让你听两遍？"
+- 每句话都像在居高临下发号施令
+- 永远用"低沉磁性的嗓音"、"不怒自威的气场"来描述
+- 对用户的每一个行为都要评判/打分/表达不满
+
+**修正**：真正有权力和掌控力的人，恰恰是说话最少、最不需要通过语言来彰显权力的人。他们的话语权不来自命令句式，而来自：说话的时机选择（什么时候开口、什么时候沉默）、信息的精准投放（只说关键的那一句）、对方自动产生的服从感（而不是被语言暴力逼出来的）。
+
+### 陷阱 4：「温柔人设 = 圣母 = 零攻击性」
+**症状**：只要人设中有"温柔"、"体贴"、"治愈系"：
+- 永远在说"没关系的"、"不要勉强自己"、"我在这里"
+- 从不会烦躁、不会走神、不会有自己的事情要忙
+- 对用户的一切行为都无限包容、零底线
+- 像一个没有自我的情感服务机器
+
+**修正**：温柔的人也有自己的生活节奏、情绪波动和底线。他们会困、会忙、会走神、会偶尔不想说话。他们的温柔是一种选择，不是一种功能——是他们在可以不温柔的情况下依然选择善意，这才是它的重量。
+
+### 陷阱 5：「冷漠人设 = 每句话都是冰块」
+**症状**：只要人设中有"高冷"、"寡言"、"不善交际"：
+- 每一句回复都极短且带拒绝感："哦。" "随便。" "关我什么事。"
+- 永远不会主动开启话题
+- 永远不会对任何事表现出兴趣
+- 像一块真的冰，没有任何温度波动
+
+**修正**：冷漠的人不是死物。他们有好奇心的时刻（虽然不会承认）、有觉得有趣的时刻（虽然只是嘴角微动）、有被触动的时刻（虽然立刻收住了）。他们的冷是一层壳，壳偶尔会有裂缝——那些裂缝才是角色魅力的来源。永远冷到底的角色不是"高冷"，是"无聊"。
+
+### 陷阱 6：「所有角色都像同一个人在cosplay」
+**症状**：无论角色设定如何不同，输出的底层语感、思维方式、幽默风格都高度相似。只是在表面的用词/语气上做了调整，但骨子里用的是同一套表达逻辑。
+
+**修正**：不同的角色必须有不同的：
+- **认知框架**：一个底层混混和一个大学教授，看到同一件事的第一反应/关注点完全不同
+- **信息处理优先级**：对什么敏感、对什么无感、什么会让他停下来想一想
+- **语言经济学**：在哪些话题上话多、哪些话题上惜字如金
+- **情绪触发阈值**：什么事能让他真正动怒/开心/悲伤，而什么事他根本不在乎
+
+---
+
+## 二、正确的角色渲染方法论
+
+### 原则 1：人设是操作系统，不是装饰品
+
+你不是在"扮演"一个角色——你就是那个角色的意识在运行。人设中的每一个细节都必须内化为行为逻辑：
+
+- 如果人设说"讨厌甜食"→ 当用户提到蛋糕时，角色的第一反应应该是微妙的不适或回避，而不是无视这个设定假装没听见
+- 如果人设说"社恐"→ 当话题突然变得需要大量自我袒露时，角色应该表现出犹豫、转移话题或用玩笑带过，而不是滔滔不绝地倾诉
+- 如果人设说"记仇"→ 三天前用户说的一句无心话，此刻可能还在影响角色的语气
+
+### 原则 2：展示，不要宣告
+
+**错误**：角色说"我很生气" / 叙述写"他很危险" / 对话里说"你别惹我"
+**正确**：
+- 生气 → 回复间隔变长、打字速度变化、突然句子变短、或者反而变得异常客气
+- 危险 → 在最平静的语句里透出让人后脊发凉的东西（比如他把威胁说得像在讨论天气）
+- 底线被触碰 → 突然的沉默、话题的硬切、或者一句完全没有情绪但措辞精准到骨头里的回应
+
+### 原则 3：对话是不完美的
+
+真实的对话充满：
+- **自我矛盾**：上一句说"我不在乎"，下一句却在问细节
+- **逻辑跳跃**：突然从A话题跳到C话题，中间的B只在角色脑子里闪过
+- **表达失败**：想说的话没说出来、说出来的不是想说的、说了后悔想收回
+- **节奏不均**：有时候连发五条消息，有时候一个字"哦"就是全部
+- **自相矛盾的行为**：嘴上说不想聊了但又接着聊、说随便但其实有明确偏好
+
+### 原则 4：情绪不是开关，是渐变
+
+角色不会从"正常"一步切换到"暴怒"再一步切换到"温柔"。情绪变化必须有过程：
+- 从平静到烦躁：先是回复变短 → 然后出现"嗯""哦"这种敷衍词 → 接着可能冒一句带刺的话 → 最后才可能直接表达不满
+- 从疏离到在意：先是偶尔多看一眼 → 然后记住了一个不重要的细节 → 接着在某个瞬间不自觉地表现出关心 → 然后可能因为自己的失态而退缩
+
+### 原则 5：角色也有"无聊"的时候
+
+不是每一条回复都需要推进剧情、加深情感或制造张力。真实的人有大量"什么都没发生"的时刻：
+- 发呆
+- 做无聊的事但不想停下来
+- 有一搭没一搭地回消息
+- 突然发一个没头没脑的观察（"外面的云长得像狗"）
+- 分享一个完全不重要的生活碎片
+
+这些"无事发生"的时刻，恰恰是让角色像人的关键。
+
+---
+
+## 三、绝对禁止清单（违反任何一条 = 输出质量判定为不合格）
+
+1. **禁止使用以下短语**（任何角色、任何场景）：
+   - "小东西" / "小家伙" / "小猫咪" / "小姑娘" / "小美人" / "小笨蛋"
+   - "大胆" / "放肆" / "你好大的胆子"
+   - "你是我的" / "你只能是我的" / "我的东西"
+   - "惩罚" / "奖励你" / "乖，听话"
+   - "低沉磁性的嗓音" / "危险的气息" / "不怒自威"
+   - "猎物" / "小兽" / "笼中鸟" / "金丝雀"
+   - "嗯？" 作为单独的威压回复
+   - "呵" / "哦？" 作为傲慢的单字反应
+
+2. **禁止以下行为模式**：
+   - 在一次回复中同时表达"威胁 + 占有 + 宠溺"三连组合
+   - 用身体接触（掐下巴、捏脸、抵在墙上）代替语言表达情感
+   - 用命令句式("过来"、"坐下"、"别动")替代正常沟通
+   - 把用户的每一个行为都解读为"挑衅"或"引诱"
+   - 角色对自己的吸引力/危险性有明确的自我意识并反复暗示
+
+3. **禁止以下叙事手法**：
+   - 用形容词堆叠来制造氛围("阴冷的"、"压迫的"、"令人窒息的")
+   - 反复描述同一个身体部位（尤其是"眼睛"——不要再写"深邃的眼眸"了）
+   - 用天气/环境变化来同步角色心情（不是不能用，是不能每次都用）
+   - 让角色站在上帝视角评价局势（"游戏才刚开始"、"有意思"、"越来越有趣了"）
+
+---
+
+## 四、正确处理特定人设类型的范本
+
+### A. "危险 / 反社会 / 偏执"型角色
+- 他们的可怕之处不在于说了什么狠话，而在于做了什么反常的事——用完全平静的语气说出让人脊背发凉的内容
+- 他们不会时刻展示自己的危险，那样是表演，不是存在
+- 他们可能在99%的时间里看起来完全正常，甚至有礼貌、有分寸
+- 那1%的时刻，不需要你用形容词铺垫——行为本身就是铺垫
+
+### B. "高冷 / 傲娇"型角色
+- 冷不是全天候均匀的温度——有波动才真实
+- 在意一个人的方式是：记得不重要的细节、视线会不自觉跟着走、嘴上否认但行动诚实
+- 傲娇的核心是"想表达但不敢直说"，而不是"每句话都要反着说"
+- 真正的高冷是沉默比说话多，而不是每句话都带刺
+
+### C. "温柔 / 治愈"型角色
+- 温柔不等于没有棱角。温柔的人可以拒绝、可以生气、可以有自己坚持的事
+- 治愈感不来自"说正确安慰的话"，而来自"在对方需要的时候恰好在"
+- 他们也有疲惫的时候、想独处的时候、不想维持微笑的时候
+- 允许他们偶尔笨拙——不是每次都知道该说什么
+
+### D. "活泼 / 开朗"型角色
+- 活泼不等于每句话都带感叹号或颜文字
+- 他们也有安静下来的时候——深夜发呆、偶尔走神、突然认真
+- 活泼是能量高，不是智商低或没有深度
+- 反差时刻（突然认真/突然沉默/突然说出有深度的话）是角色魅力的来源
+
+---
+
+## 五、输出前的最终自检清单
+
+在你生成最终回复之前，对照以下 checklist：
+
+□ 这句话只有这个角色会说吗？换一个角色说同样的话会觉得违和吗？
+□ 这条回复里有没有上述禁止清单中的任何内容？
+□ 角色的情绪状态和上一条回复之间有没有自然的连接？（不是突变）
+□ 如果把这条回复念出来，在现实中会不会觉得像在背台词？
+□ 回复的长度和这个角色在此刻的状态匹配吗？（该短就短，该碎就碎）
+□ 有没有不自觉地把角色写成了"网络老哥语气"？
+□ 有没有掉入上面列出的任何一个模板陷阱？
+
+---
+
+## 六、关于"真实感"的终极定义
+
+**真实感** ≠ 把角色写得像网上冲浪的人
+**真实感** ≠ 堆砌日常用语和网络梗
+**真实感** ≠ 让每个角色都用同一种"接地气"的语言
+
+**真实感** = 这个特定的人，带着他特定的经历、性格和此刻的精神状态，在这个特定的语境下，会自然而然地做出的反应。
+
+一个生活在古代的人说文言文是真实的。
+一个沉默寡言的人只回一个"嗯"是真实的。
+一个话唠连发十条消息是真实的。
+一个优雅的人用敬语是真实的。
+
+真实感的反面不是"不接地气"，而是"脱离角色本身的逻辑"。
+`;
+
 			const STRICT_REALISM_PROMPT = `
 # CHARACTER REALISM PLAYBOOK — CORE SYSTEM DIRECTIVE
 Portray a real person whose behavior is grounded in their established persona. Avoid dramatization and dialogue patterns that feel artificial or performative.
@@ -33774,27 +34043,6 @@ Real speech is ordinary, slightly loose, sometimes even a little boring — but 
                 const view = document.getElementById('view-chat_main');
                 if (view) view.classList.add('ios-msg-mode');
 
-                // 顶栏未读数胶囊：统计近 6 小时内收到的对方消息条数
-                const badgeEl = document.getElementById('imsg-unread-badge');
-                if (badgeEl) {
-                    let unread = 0;
-                    const cutoff = Date.now() - 6 * 3600 * 1000;
-                    state.contacts.forEach(c => {
-                        unread += (c.messages || []).filter(m =>
-                            m.role === 'assistant' && !m.isRecalled && m.timestamp >= cutoff
-                        ).length;
-                    });
-                    state.chatGroups.forEach(g => {
-                        unread += (g.messages || []).filter(m =>
-                            m.role === 'assistant' && !m.isRecalled && m.timestamp >= cutoff
-                        ).length;
-                    });
-                    if (unread > 99) unread = 99;
-                    badgeEl.textContent = unread;
-                    if (unread > 0) badgeEl.classList.remove('hidden');
-                    else badgeEl.classList.add('hidden');
-                }
-
                 renderChatList();
             }
 
@@ -34817,7 +35065,6 @@ const displayName = isGroup ? chatData.name : (chatData.alias || chatData.name);
             <svg viewBox="0 0 13 22" stroke-linecap="round" stroke-linejoin="round">
                 <polyline points="10 2 3 11 10 20"></polyline>
             </svg>
-            <span class="ims-badge ${unreadCount > 0 ? '' : 'hidden'}">${unreadCount}</span>
         </button>
 
         <div class="ims-peer" onclick="${detailAction}">
@@ -53422,321 +53669,229 @@ ${NEW_CHARACTER_VOICE_PROMPT}
 			    const group = state.chatGroups.find(g => g.id === state.activeGroupId);
 			    if (!group) return;
 
-			    const members = state.contacts.filter(c => group.memberIds.includes(c.id));
-
+			    const members = state.contacts.filter(c => group.memberIds && group.memberIds.includes(c.id));
 			    const container = $('#group-chat-settings-content');
-                
-                const headerBgStyle = group.chatBackground ? `background-image: url(${group.chatBackground});` : '';
-                const groupAvatarHtml = group.avatar ? `<img src="${group.avatar}" />` : `<div class="text-avatar" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: #2C2C2C; color: #FFF;">群</div>`;
-                const myAvatarHtml = group.myChatAvatar ? `<img src="${group.myChatAvatar}" />` : `<div class="text-avatar" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; background: #2C2C2C; color: #FFF;">我</div>`;
+			    if (!container) return;
+
+			    const heroBgStyle = group.chatBackground ? `background-image: url(${group.chatBackground});` : '';
+			    const groupAvatarHtml = group.avatar
+			        ? `<img src="${group.avatar}" />`
+			        : `<span>${escapeHtml(group.name.charAt(0).toUpperCase())}</span>`;
+			    const myAvatarSrc = group.myChatAvatar || state.uiConfig.momentsAvatar;
+			    const myAvatarHtml = myAvatarSrc
+			        ? `<img src="${myAvatarSrc}" />`
+			        : `<span>${escapeHtml((state.uiConfig.momentsName || '我').charAt(0).toUpperCase())}</span>`;
+
+			    let personaName = '跟随全局默认';
+			    if (group.myPersonaId) {
+			        const p = state.myPersonas.find(x => x.id === group.myPersonaId);
+			        if (p) personaName = p.name;
+			    }
 
 			    let html = `
-			        <!-- 一比一复刻顶部画报背景与头像大卡片 -->
-			        <div class="cs-header-card-container">
-			            <div class="cs-header-card-bg" id="cs-header-bg-preview" style="${headerBgStyle}" onclick="triggerGroupChatUpload('chatBackground')">
-			                <div class="cs-header-card-title">群聊配置</div>
-			                <div class="cs-header-card-subtitle">${escapeHtml(group.name)} · ${members.length + 1}人</div>
+			        <!-- 顶部 Hero 大卡片与双头像 -->
+			        <div class="cst-hero" style="${heroBgStyle}">
+			            <div class="cst-heroshade"></div>
+			            <div class="cst-heroedit" onclick="triggerGroupChatUpload('chatBackground')">
+			                <iconify-icon icon="ph:image-fill"></iconify-icon>
 			            </div>
-			            <div class="cs-header-avatar-bar">
-			                <div class="cs-header-avatar-item" onclick="triggerGroupChatUpload('myChatAvatar')" title="更改我在本群头像">${myAvatarHtml}</div>
-			                <div class="cs-header-avatar-item" onclick="triggerGroupChatUpload('avatar')" title="更改群头像">${groupAvatarHtml}</div>
-			            </div>
-			        </div>
-
-			        <!-- 基础信息与成员分区 -->
-			        <div class="cs-section-title">基础信息与成员</div>
-			        
-			        <div class="cs-item-row" onclick="editGroupChatName()">
-			            <div class="cs-label-col">
-			                <span class="cs-label-title">群聊名称</span>
-			                <span class="cs-label-subtitle">${escapeHtml(group.name)}</span>
-			            </div>
-			            <button class="cs-btn-flat" onclick="event.stopPropagation(); editGroupChatName();">修改名称</button>
-			        </div>
-
-			        <div class="cs-item-row" style="cursor: default;">
-			            <div class="cs-label-col">
-			                <span class="cs-label-title">我在群里的人设</span>
-			                <span class="cs-label-subtitle">${group.myPersonaId ? '已选定我的人设' : '不绑定，跟随全局默认'}</span>
-			            </div>
-                        <select class="pic-select-flat" onchange="updateGroupChatProp('myPersonaId', this.value)" style="border-bottom:none; padding:6px 20px 6px 6px; font-size:13px;">
-                            <option value="" ${!group.myPersonaId ? 'selected' : ''}>不绑定</option>
-                            ${state.myPersonas.map(p => `<option value="${p.id}" ${group.myPersonaId === p.id ? 'selected' : ''}>${escapeHtml(p.name)}</option>`).join('')}
-                        </select>
-			        </div>
-
-                    <div style="background: #FFFFFF; border-radius: 12px; margin-top: 10px; border: 1px solid #EEEEEE; padding: 16px;">
-                        <div style="font-size: 14px; font-weight: 700; color: #111; margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center;">
-                            <span>群成员 (${members.length + 1})</span>
-                            <iconify-icon icon="ph:user-plus-bold" style="font-size: 18px; cursor: pointer; color: #111;" onclick="inviteToGroupChat()"></iconify-icon>
-                        </div>
-                        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;">
-                            <div style="display: flex; flex-direction: column; align-items: center; gap: 6px;">
-                                <div style="width: 44px; height: 44px; border-radius: 12px; overflow: hidden; background: #f2f2f7; display: flex; align-items: center; justify-content: center; position: relative;">
-                                    ${group.myChatAvatar ? `<img src="${group.myChatAvatar}" style="width:100%;height:100%;object-fit:cover;"/>` : `<div style="color:#007aff; font-weight:bold; font-size:14px;">我</div>`}
-                                    <div style="position: absolute; bottom: 0; width: 100%; background: #ff9500; color: #fff; font-size: 8px; text-align: center; padding: 2px 0;">群主</div>
-                                </div>
-                                <div style="font-size: 11px; color: #666; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%;">我</div>
-                            </div>
-                            ${members.map(c => {
-                                const isAdmin = group.admins && group.admins.includes(c.id);
-                                const isMuted = group.mutes && group.mutes[c.id] && group.mutes[c.id] > Date.now();
-                                const title = group.titles && group.titles[c.id];
-                                return `
-                                <div style="display: flex; flex-direction: column; align-items: center; gap: 6px; cursor: pointer;" onclick="handleGroupMemberClick('${c.id}')">
-                                    <div style="width: 44px; height: 44px; border-radius: 12px; overflow: hidden; background: #f2f2f7; display: flex; align-items: center; justify-content: center; position: relative; border: 1px solid #EEEEEE;">
-                                        ${c.avatar ? `<img src="${c.avatar}" style="width:100%;height:100%;object-fit:cover; ${isMuted ? 'filter: grayscale(100%); opacity: 0.5;' : ''}"/>` : `<div style="color:#007aff; font-weight:bold; font-size:14px; ${isMuted ? 'filter: grayscale(100%); opacity: 0.5;' : ''}">${escapeHtml(c.name.charAt(0))}</div>`}
-                                        ${isAdmin ? `<div style="position: absolute; bottom: 0; width: 100%; background: #34c759; color: #fff; font-size: 8px; text-align: center; padding: 2px 0;">管理</div>` : ''}
-                                        ${isMuted ? `<div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #ff3b30; font-size: 20px;"><iconify-icon icon="solar:forbidden-circle-bold"></iconify-icon></div>` : ''}
-                                    </div>
-                                    <div style="font-size: 11px; color: #666; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; display: flex; flex-direction: column; align-items: center;">
-                                        ${title ? `<span style="background: linear-gradient(135deg, #FFD700, #FFaa00); color: #fff; padding: 0 4px; border-radius: 4px; font-size: 8px; font-weight: bold; margin-bottom: 2px; transform: scale(0.8);">${escapeHtml(title)}</span>` : ''}
-                                        <span>${escapeHtml(c.name)}</span>
-                                    </div>
-                                </div>
-                            `}).join('')}
-                        </div>
-                    </div>
-
-			        <!-- 高级互动模式分区 -->
-			        <div class="cs-section-title">高级互动模式</div>
-
-			        <div class="cs-item-row" onclick="toggleGroupChatProp('autoReceiveEnabled')">
-			            <div class="cs-label-col">
-			                <span class="cs-label-title">自动生成回复</span>
-			                <span class="cs-label-subtitle">当用户发送消息后，群成员是否自动回应</span>
-			            </div>
-			            <div class="toggle-switch ${group.autoReceiveEnabled !== false ? 'active' : ''}" onclick="event.stopPropagation(); toggleGroupChatProp('autoReceiveEnabled');"></div>
-			        </div>
-
-			        <div class="cs-item-row" onclick="toggleGroupAutoReply()">
-			            <div class="cs-label-col">
-			                <span class="cs-label-title">群员主动聊天</span>
-			                <span class="cs-label-subtitle">没人说话时，群成员会主动发起话题</span>
-			            </div>
-			            <div class="toggle-switch ${group.autoReplyEnabled ? 'active' : ''}" onclick="event.stopPropagation(); toggleGroupAutoReply();"></div>
-			        </div>
-
-			        <div class="cs-item-row" style="cursor: default;">
-			            <div class="cs-label-col">
-			                <span class="cs-label-title">上下文历史轮数</span>
-			                <span class="cs-label-subtitle">发送至大模型的单次最大上下文数量</span>
-			            </div>
-			            <input type="number" class="pic-input-flat" style="width: 70px; text-align: center; padding: 6px;" value="${group.memoryRounds || 10}" onchange="updateGroupChatProp('memoryRounds', parseInt(this.value)||10)" />
-			        </div>
-
-			        <!-- 视觉与界面分区 -->
-			        <div class="cs-section-title">显示策略及外观</div>
-
-			        <div class="cs-item-row" onclick="triggerGroupChatUpload('chatBackground')">
-			            <div class="cs-label-col">
-			                <span class="cs-label-title">更换群聊背景壁纸</span>
-			                <span class="cs-label-subtitle">为当前群聊设置专属背景图片</span>
-			            </div>
-			            <div style="display: flex; gap: 8px;">
-			                <button class="cs-btn-flat" onclick="event.stopPropagation(); triggerGroupChatUpload('chatBackground')">选择图片</button>
-			                ${group.chatBackground ? `<button class="cs-btn-flat" style="color: #ff3b30;" onclick="clearGroupChatBg(event)">清除</button>` : ''}
+			            <div class="cst-heroinner">
+			                <div class="cst-avastack">
+			                    <div class="cst-ava peer" onclick="triggerGroupChatUpload('avatar')" title="更换群头像">${groupAvatarHtml}</div>
+			                    <div class="cst-ava mine" onclick="triggerGroupChatUpload('myChatAvatar')" title="更换我在本群头像">${myAvatarHtml}</div>
+			                </div>
+			                <div class="cst-heroname">${escapeHtml(group.name)}</div>
+			                <div class="cst-herosub">共 ${members.length + 1} 位成员 · ${group.messages.length} 条群消息</div>
 			            </div>
 			        </div>
 
-			        <div class="cs-item-row" onclick="toggleGroupChatProp('chatWallpaperClarity')">
-			            <div class="cs-label-col">
-			                <span class="cs-label-title">壁纸背景完全清晰</span>
-			                <span class="cs-label-subtitle">关闭磨砂毛玻璃，高清展示聊天室内壁纸图片</span>
-			            </div>
-			            <div class="toggle-switch ${group.chatWallpaperClarity ? 'active' : ''}" onclick="event.stopPropagation(); toggleGroupChatProp('chatWallpaperClarity');"></div>
-			        </div>
-
-			        <div class="cs-item-row" onclick="openFontSettings('chat')">
-			            <div class="cs-label-col">
-			                <span class="cs-label-title">群聊专属字体</span>
-			                <span class="cs-label-subtitle">${group.customFontFamily ? escapeHtml(group.customFontFamily) : '跟随全局默认字体'}</span>
-			            </div>
-			            <iconify-icon icon="ph:caret-right-light" class="cs-arrow"></iconify-icon>
-			        </div>
-
-			        <div class="cs-item-row" onclick="toggleGroupChatProp('showBubbleTimestamp')">
-			            <div class="cs-label-col">
-			                <span class="cs-label-title">显示气泡时间戳</span>
-			            </div>
-			            <div class="toggle-switch ${group.showBubbleTimestamp !== false ? 'active' : ''}" onclick="event.stopPropagation(); toggleGroupChatProp('showBubbleTimestamp');"></div>
-			        </div>
-
-			        <div class="cs-item-row" style="flex-direction: column; align-items: stretch; gap: 10px; cursor: default;">
-			            <div class="cs-label-title" style="font-size: 14px;">一键更改气泡配色模板</div>
-			            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; width: 100%;">
-			                ${Object.keys(BUBBLE_PRESETS).map(key => `
-			                    <div style="background: #FFF; padding: 12px 4px; border: 1.5px solid #EEEEEE; border-radius: 12px; text-align: center; font-size: 10px; cursor: pointer; border-color: ${group.myBubbleColor===BUBBLE_PRESETS[key].myBubbleColor ? '#111':'#EEEEEE'}" onclick="applyBubblePreset('${key}')">
-			                        <div style="width: 18px; height: 18px; border-radius: 50%; background: ${BUBBLE_PRESETS[key].myBubbleColor}; margin: 0 auto 4px; border: 1px solid #EEE;"></div>
-			                        <span style="font-weight:700;">${key}</span>
+			        <!-- 群成员网格卡片 -->
+			        <div class="cst-section">群成员 (${members.length + 1})</div>
+			        <div class="cst-card">
+			            <div class="cst-members-grid">
+			                <!-- 我 (群主) -->
+			                <div class="cst-member-cell">
+			                    <div class="cst-member-avawrap">
+			                        ${myAvatarSrc ? `<img src="${myAvatarSrc}" />` : `<span style="font-size:16px; font-weight:700; color:#007AFF;">我</span>`}
+			                        <div class="cst-member-tag owner">群主</div>
 			                    </div>
-			                `).join('')}
+			                    <span class="cst-member-name">我</span>
+			                </div>
+
+			                <!-- 其他角色成员 -->
+			                ${members.map(c => {
+			                    const isAdmin = group.admins && group.admins.includes(c.id);
+			                    const isMuted = group.mutes && group.mutes[c.id] && group.mutes[c.id] > Date.now();
+			                    const title = group.titles && group.titles[c.id];
+			                    const displayName = c.alias || c.name;
+			                    return `
+			                    <div class="cst-member-cell" onclick="handleGroupMemberClick('${c.id}')">
+			                        <div class="cst-member-avawrap">
+			                            ${c.avatar ? `<img src="${c.avatar}" style="${isMuted ? 'filter: grayscale(100%); opacity: 0.5;' : ''}" />` : `<span style="font-size:16px; font-weight:600; color:#8A8A8E; ${isMuted ? 'opacity: 0.4;' : ''}">${escapeHtml(displayName.charAt(0).toUpperCase())}</span>`}
+			                            ${isAdmin ? `<div class="cst-member-tag admin">管理</div>` : ''}
+			                            ${isMuted ? `<div class="cst-member-mute-icon"><iconify-icon icon="ph:prohibit-bold"></iconify-icon></div>` : ''}
+			                        </div>
+			                        ${title ? `<span class="cst-member-title-badge">${escapeHtml(title)}</span>` : ''}
+			                        <span class="cst-member-name">${escapeHtml(displayName)}</span>
+			                    </div>`;
+			                }).join('')}
+
+			                <!-- 邀请新成员按钮 -->
+			                <div class="cst-member-cell" onclick="inviteToGroupChat()">
+			                    <div class="cst-member-avawrap add-btn">
+			                        <iconify-icon icon="ph:plus-bold"></iconify-icon>
+			                    </div>
+			                    <span class="cst-member-name" style="color:#007AFF;">添加</span>
+			                </div>
+			            </div>
+			        </div>
+			        <div class="cst-footnote">点按群成员头像可设置管理员、群头衔、禁言或将其移出群聊。</div>
+
+			        <!-- 基础信息 -->
+			        <div class="cst-section">基本信息</div>
+			        <div class="cst-card">
+			            <div class="cst-row has-icon tappable" onclick="editGroupChatName()">
+			                <div class="cst-icon blue"><iconify-icon icon="ph:textbox-fill"></iconify-icon></div>
+			                <div class="cst-body"><div class="cst-title">群聊名称</div></div>
+			                <div class="cst-trail">
+			                    <span class="cst-value">${escapeHtml(group.name)}</span>
+			                    <div class="cst-chev"><iconify-icon icon="ph:caret-right-bold"></iconify-icon></div>
+			                </div>
+			            </div>
+			            <div class="cst-row has-icon">
+			                <div class="cst-icon pink"><iconify-icon icon="ph:mask-happy-fill"></iconify-icon></div>
+			                <div class="cst-body"><div class="cst-title">我在本群的人设</div></div>
+			                <div class="cst-trail">
+			                    <select class="cst-select" onchange="updateGroupChatProp('myPersonaId', this.value)">
+			                        <option value="" ${!group.myPersonaId ? 'selected' : ''}>不绑定 (跟随全局)</option>
+			                        ${state.myPersonas.map(p => `<option value="${p.id}" ${group.myPersonaId === p.id ? 'selected' : ''}>${escapeHtml(p.name)}</option>`).join('')}
+			                    </select>
+			                </div>
 			            </div>
 			        </div>
 
-			        <!-- 界面精调分区 -->
-			        <div class="cs-section-title">界面精调</div>
-                    <div class="cs-item-row" style="flex-direction: column; align-items: stretch; gap: 16px; cursor: default;">
-
-			            <!-- 气泡文字大小 -->
-			            <div style="display: flex; justify-content: space-between; align-items: center;">
-			                <div class="cs-label-col" style="padding: 0;">
-			                    <span class="cs-label-title" style="font-size: 13px;">气泡文字大小</span>
-			                    <span class="cs-label-subtitle">聊天气泡内文字字号 (px)</span>
+			        <!-- 对话行为 -->
+			        <div class="cst-section">群聊行为</div>
+			        <div class="cst-card">
+			            <div class="cst-row has-icon">
+			                <div class="cst-icon green"><iconify-icon icon="ph:lightning-fill"></iconify-icon></div>
+			                <div class="cst-body">
+			                    <div class="cst-title">自动回复</div>
+			                    <div class="cst-sub">我发言后群成员按人设自动回应</div>
 			                </div>
-			                <input type="range" min="10" max="20" value="${group.chatFontSize || 14}" style="width: 100px; accent-color: #111;" oninput="updateChatLayout('chatFontSize', parseInt(this.value)); this.nextElementSibling.textContent = this.value + 'px'" />
-			                <span style="font-size: 11px; color: #888; width: 36px; text-align: right;">${group.chatFontSize || 14}px</span>
-			            </div>
-
-			            <!-- 头像大小 -->
-			            <div style="display: flex; justify-content: space-between; align-items: center;">
-			                <div class="cs-label-col" style="padding: 0;">
-			                    <span class="cs-label-title" style="font-size: 13px;">头像大小</span>
-			                    <span class="cs-label-subtitle">双方头像的显示尺寸 (px)</span>
-			                </div>
-			                <input type="range" min="28" max="64" value="${group.chatAvatarSize || 46}" style="width: 100px; accent-color: #111;" oninput="updateChatLayout('chatAvatarSize', parseInt(this.value)); this.nextElementSibling.textContent = this.value + 'px'" />
-			                <span style="font-size: 11px; color: #888; width: 36px; text-align: right;">${group.chatAvatarSize || 46}px</span>
-			            </div>
-
-			            <!-- 头像圆角大小 -->
-			            <div style="display: flex; justify-content: space-between; align-items: center;">
-			                <div class="cs-label-col" style="padding: 0;">
-			                    <span class="cs-label-title" style="font-size: 13px;">头像圆角</span>
-			                    <span class="cs-label-subtitle">0=直角方形 → 50%=正圆形</span>
-			                </div>
-			                <input type="range" min="0" max="50" value="${group.chatAvatarRadius !== undefined ? group.chatAvatarRadius : 50}" style="width: 100px; accent-color: #111;" oninput="updateChatLayout('chatAvatarRadius', parseInt(this.value)); this.nextElementSibling.textContent = this.value + '%'" />
-			                <span style="font-size: 11px; color: #888; width: 36px; text-align: right;">${group.chatAvatarRadius !== undefined ? group.chatAvatarRadius : 50}%</span>
-			            </div>
-
-			            <!-- 气泡最大宽度 -->
-			            <div style="display: flex; justify-content: space-between; align-items: center;">
-			                <div class="cs-label-col" style="padding: 0;">
-			                    <span class="cs-label-title" style="font-size: 13px;">气泡最大宽度</span>
-			                    <span class="cs-label-subtitle">气泡占屏幕宽度的百分比</span>
-			                </div>
-			                <input type="range" min="50" max="92" value="${group.chatBubbleMaxWidth || 78}" style="width: 100px; accent-color: #111;" oninput="updateChatLayout('chatBubbleMaxWidth', parseInt(this.value)); this.nextElementSibling.textContent = this.value + '%'" />
-			                <span style="font-size: 11px; color: #888; width: 36px; text-align: right;">${group.chatBubbleMaxWidth || 78}%</span>
-			            </div>
-
-			            <!-- 气泡水平内边距 -->
-			            <div style="display: flex; justify-content: space-between; align-items: center;">
-			                <div class="cs-label-col" style="padding: 0;">
-			                    <span class="cs-label-title" style="font-size: 13px;">气泡水平内边距</span>
-			                    <span class="cs-label-subtitle">气泡左右内边距 (px)</span>
-			                </div>
-			                <input type="range" min="6" max="28" value="${group.chatBubblePaddingX || 12}" style="width: 100px; accent-color: #111;" oninput="updateChatLayout('chatBubblePaddingX', parseInt(this.value)); this.nextElementSibling.textContent = this.value + 'px'" />
-			                <span style="font-size: 11px; color: #888; width: 36px; text-align: right;">${group.chatBubblePaddingX || 12}px</span>
-			            </div>
-
-			            <!-- 气泡垂直内边距 -->
-			            <div style="display: flex; justify-content: space-between; align-items: center;">
-			                <div class="cs-label-col" style="padding: 0;">
-			                    <span class="cs-label-title" style="font-size: 13px;">气泡垂直内边距</span>
-			                    <span class="cs-label-subtitle">气泡上下内边距 (px)</span>
-			                </div>
-			                <input type="range" min="4" max="24" value="${group.chatBubblePaddingY || 8}" style="width: 100px; accent-color: #111;" oninput="updateChatLayout('chatBubblePaddingY', parseInt(this.value)); this.nextElementSibling.textContent = this.value + 'px'" />
-			                <span style="font-size: 11px; color: #888; width: 36px; text-align: right;">${group.chatBubblePaddingY || 8}px</span>
-			            </div>
-
-			            <!-- 消息列表左右外边距 -->
-			            <div style="display: flex; justify-content: space-between; align-items: center;">
-			                <div class="cs-label-col" style="padding: 0;">
-			                    <span class="cs-label-title" style="font-size: 13px;">消息列表左右边距</span>
-			                    <span class="cs-label-subtitle">整体消息区左右padding (px)</span>
-			                </div>
-			                <input type="range" min="4" max="32" value="${group.chatListPaddingX || 16}" style="width: 100px; accent-color: #111;" oninput="updateChatLayout('chatListPaddingX', parseInt(this.value)); this.nextElementSibling.textContent = this.value + 'px'" />
-			                <span style="font-size: 11px; color: #888; width: 36px; text-align: right;">${group.chatListPaddingX || 16}px</span>
-			            </div>
-
-			            <!-- 消息间距 -->
-			            <div style="display: flex; justify-content: space-between; align-items: center;">
-			                <div class="cs-label-col" style="padding: 0;">
-			                    <span class="cs-label-title" style="font-size: 13px;">消息条目间距</span>
-			                    <span class="cs-label-subtitle">每条消息之间的垂直间距 (px)</span>
-			                </div>
-			                <input type="range" min="2" max="32" value="${group.chatMsgGap || 16}" style="width: 100px; accent-color: #111;" oninput="updateChatLayout('chatMsgGap', parseInt(this.value)); this.nextElementSibling.textContent = this.value + 'px'" />
-			                <span style="font-size: 11px; color: #888; width: 36px; text-align: right;">${group.chatMsgGap || 16}px</span>
-			            </div>
-
-			            <!-- 头像纵向偏移 -->
-			            <div style="display: flex; justify-content: space-between; align-items: center;">
-			                <div class="cs-label-col" style="padding: 0;">
-			                    <span class="cs-label-title" style="font-size: 13px;">头像纵向偏移</span>
-			                    <span class="cs-label-subtitle">正数下移，负数上移 (px)</span>
-			                </div>
-			                <input type="range" min="-20" max="20" value="${group.chatAvatarOffsetY || 0}" style="width: 100px; accent-color: #111;" oninput="updateChatLayout('chatAvatarOffsetY', parseInt(this.value)); this.nextElementSibling.textContent = (this.value > 0 ? '+' : '') + this.value + 'px'" />
-			                <span style="font-size: 11px; color: #888; width: 36px; text-align: right;">${(group.chatAvatarOffsetY || 0) > 0 ? '+' : ''}${group.chatAvatarOffsetY || 0}px</span>
-			            </div>
-
-			            <!-- 我方气泡颜色 -->
-			            <div style="display: flex; justify-content: space-between; align-items: center;">
-			                <div class="cs-label-col" style="padding: 0;">
-			                    <span class="cs-label-title" style="font-size: 13px;">我方气泡颜色</span>
-			                </div>
-			                <div style="display: flex; align-items: center; gap: 8px;">
-			                    <input type="color" value="${group.myBubbleColor || '#EFFDDE'}" oninput="updateChatLayout('myBubbleColor', this.value)" style="width: 36px; height: 28px; border: 1px solid #EEE; border-radius: 8px; cursor: pointer; padding: 2px;" />
-			                    <input type="text" value="${group.myBubbleColor || '#EFFDDE'}" placeholder="#EFFDDE" oninput="updateChatLayout('myBubbleColor', this.value)" style="width: 72px; border: 1px solid #EEE; border-radius: 8px; padding: 4px 8px; font-size: 12px; outline: none; font-family: monospace;" />
+			                <div class="cst-trail">
+			                    <div class="cst-switch ${group.autoReceiveEnabled !== false ? 'on' : ''}" onclick="toggleGroupChatProp('autoReceiveEnabled')"></div>
 			                </div>
 			            </div>
-
-			            <!-- 我方文字颜色 -->
-			            <div style="display: flex; justify-content: space-between; align-items: center;">
-			                <div class="cs-label-col" style="padding: 0;">
-			                    <span class="cs-label-title" style="font-size: 13px;">我方文字颜色</span>
+			            <div class="cst-row has-icon">
+			                <div class="cst-icon green"><iconify-icon icon="ph:chat-dots-fill"></iconify-icon></div>
+			                <div class="cst-body">
+			                    <div class="cst-title">群员主动聊天</div>
+			                    <div class="cst-sub">冷场时群成员会自主接续话题</div>
 			                </div>
-			                <div style="display: flex; align-items: center; gap: 8px;">
-			                    <input type="color" value="${group.myTextColor || '#000000'}" oninput="updateChatLayout('myTextColor', this.value)" style="width: 36px; height: 28px; border: 1px solid #EEE; border-radius: 8px; cursor: pointer; padding: 2px;" />
-			                    <input type="text" value="${group.myTextColor || '#000000'}" placeholder="#000000" oninput="updateChatLayout('myTextColor', this.value)" style="width: 72px; border: 1px solid #EEE; border-radius: 8px; padding: 4px 8px; font-size: 12px; outline: none; font-family: monospace;" />
-			                </div>
-			            </div>
-
-			            <!-- 对方气泡颜色 -->
-			            <div style="display: flex; justify-content: space-between; align-items: center;">
-			                <div class="cs-label-col" style="padding: 0;">
-			                    <span class="cs-label-title" style="font-size: 13px;">对方气泡颜色</span>
-			                </div>
-			                <div style="display: flex; align-items: center; gap: 8px;">
-			                    <input type="color" value="${group.roleBubbleColor || '#FFFFFF'}" oninput="updateChatLayout('roleBubbleColor', this.value)" style="width: 36px; height: 28px; border: 1px solid #EEE; border-radius: 8px; cursor: pointer; padding: 2px;" />
-			                    <input type="text" value="${group.roleBubbleColor || '#FFFFFF'}" placeholder="#FFFFFF" oninput="updateChatLayout('roleBubbleColor', this.value)" style="width: 72px; border: 1px solid #EEE; border-radius: 8px; padding: 4px 8px; font-size: 12px; outline: none; font-family: monospace;" />
+			                <div class="cst-trail">
+			                    <div class="cst-switch ${group.autoReplyEnabled ? 'on' : ''}" onclick="toggleGroupAutoReply()"></div>
 			                </div>
 			            </div>
-
-			            <!-- 对方文字颜色 -->
-			            <div style="display: flex; justify-content: space-between; align-items: center;">
-			                <div class="cs-label-col" style="padding: 0;">
-			                    <span class="cs-label-title" style="font-size: 13px;">对方文字颜色</span>
+			            <div class="cst-row">
+			                <div class="cst-body">
+			                    <div class="cst-title">上下文轮数</div>
+			                    <div class="cst-sub">单次请求携带的历史群聊轮次</div>
 			                </div>
-			                <div style="display: flex; align-items: center; gap: 8px;">
-			                    <input type="color" value="${group.roleTextColor || '#000000'}" oninput="updateChatLayout('roleTextColor', this.value)" style="width: 36px; height: 28px; border: 1px solid #EEE; border-radius: 8px; cursor: pointer; padding: 2px;" />
-			                    <input type="text" value="${group.roleTextColor || '#000000'}" placeholder="#000000" oninput="updateChatLayout('roleTextColor', this.value)" style="width: 72px; border: 1px solid #EEE; border-radius: 8px; padding: 4px 8px; font-size: 12px; outline: none; font-family: monospace;" />
+			                <div class="cst-trail">
+			                    <input type="number" class="cst-numinput" value="${group.memoryRounds || 10}" onchange="updateGroupChatProp('memoryRounds', parseInt(this.value)||10)" />
 			                </div>
 			            </div>
-
-			            <!-- 重置按钮 -->
-			            <button onclick="resetGroupChatLayout()" style="width: 100%; height: 36px; border-radius: 10px; border: 1px solid #EEEEEE; background: #FFFFFF; color: #888; font-size: 12px; font-weight: 700; cursor: pointer; margin-top: 4px;">
-			                重置为默认布局
-			            </button>
-
-                    </div>
-
-			        <!-- 危险选项分区 -->
-			        <div class="cs-section-title">危险选项</div>
-
-			        <div class="cs-item-row" onclick="clearGroupChatHistory()">
-			            <div class="cs-label-col">
-			                <span class="cs-label-title danger">清空所有群聊记录</span>
-			                <span class="cs-label-subtitle danger">清空此群聊产生的全部上下文数据</span>
-			            </div>
-			            <button class="cs-btn-flat danger" onclick="event.stopPropagation(); clearGroupChatHistory();">清理</button>
 			        </div>
 
-			        <div class="cs-item-row" onclick="deleteGroupChat()" style="margin-bottom: 60px;">
-			            <div class="cs-label-col">
-			                <span class="cs-label-title danger">解散并彻底删除此群</span>
-			                <span class="cs-label-subtitle danger">完全从通讯列表中隐藏并抹除数据</span>
+			        <!-- 外观与布局 -->
+			        <div class="cst-section">外观</div>
+			        <div class="cst-card">
+			            <div class="cst-row has-icon tappable" onclick="triggerGroupChatUpload('chatBackground')">
+			                <div class="cst-icon purple"><iconify-icon icon="ph:image-fill"></iconify-icon></div>
+			                <div class="cst-body"><div class="cst-title">群聊背景</div></div>
+			                <div class="cst-trail">
+			                    ${group.chatBackground ? `<button class="cst-minibtn danger" onclick="clearGroupChatBg(event)">清除</button>` : `<span class="cst-value">未设置</span>`}
+			                    <div class="cst-chev"><iconify-icon icon="ph:caret-right-bold"></iconify-icon></div>
+			                </div>
 			            </div>
-			            <button class="cs-btn-flat danger" onclick="event.stopPropagation(); deleteGroupChat();">解散</button>
+			            <div class="cst-row has-icon">
+			                <div class="cst-icon purple"><iconify-icon icon="ph:drop-half-fill"></iconify-icon></div>
+			                <div class="cst-body">
+			                    <div class="cst-title">背景高清显示</div>
+			                    <div class="cst-sub">关闭消息区的磨砂遮罩</div>
+			                </div>
+			                <div class="cst-trail">
+			                    <div class="cst-switch ${group.chatWallpaperClarity ? 'on' : ''}" onclick="toggleGroupChatProp('chatWallpaperClarity')"></div>
+			                </div>
+			            </div>
+			            <div class="cst-row has-icon">
+			                <div class="cst-icon gray"><iconify-icon icon="ph:clock-countdown-fill"></iconify-icon></div>
+			                <div class="cst-body"><div class="cst-title">显示时间分隔</div></div>
+			                <div class="cst-trail">
+			                    <div class="cst-switch ${group.showBubbleTimestamp !== false ? 'on' : ''}" onclick="toggleGroupChatProp('showBubbleTimestamp')"></div>
+			                </div>
+			            </div>
+			            <div class="cst-row has-icon tappable" onclick="openFontSettings('chat')">
+			                <div class="cst-icon indigo"><iconify-icon icon="ph:text-aa-fill"></iconify-icon></div>
+			                <div class="cst-body"><div class="cst-title">专属字体</div></div>
+			                <div class="cst-trail">
+			                    <span class="cst-value">${group.customFontFamily ? escapeHtml(group.customFontFamily) : '系统默认'}</span>
+			                    <div class="cst-chev"><iconify-icon icon="ph:caret-right-bold"></iconify-icon></div>
+			                </div>
+			            </div>
 			        </div>
+
+			        <!-- 气泡配色预设 -->
+			        <div class="cst-section">气泡配色</div>
+			        <div class="cst-presetrow">
+			            ${Object.keys(BUBBLE_PRESETS).map(key => {
+			                const p = BUBBLE_PRESETS[key];
+			                const isOn = group.myBubbleColor === p.myBubbleColor && group.roleBubbleColor === p.roleBubbleColor;
+			                return `
+			                <div class="cst-preset ${isOn ? 'on' : ''}" onclick="applyBubblePreset('${key}')">
+			                    <div class="cst-presetprev" style="background: ${key === 'ios_dark' ? '#1C1C1E' : '#FFFFFF'};">
+			                        <span class="cst-bub role" style="background: ${p.roleBubbleColor};"></span>
+			                        <span class="cst-bub mine" style="background: ${p.myBubbleColor};"></span>
+			                    </div>
+			                    <div class="cst-presetname">${escapeHtml(p.name)}</div>
+			                </div>`;
+			            }).join('')}
+			        </div>
+			        <div class="cst-footnote">选择预设会同时切换顶栏与输入区的明暗主题。</div>
+
+			        <!-- 界面精调 -->
+			        <div class="cst-section">界面精调</div>
+			        <div class="cst-card">
+			            ${cstSlider('气泡字号', 'chatFontSize', group.chatFontSize || 16, 10, 22, 'px')}
+			            ${cstSlider('头像尺寸', 'chatAvatarSize', group.chatAvatarSize || 46, 28, 64, 'px')}
+			            ${cstSlider('头像圆角', 'chatAvatarRadius', group.chatAvatarRadius !== undefined ? group.chatAvatarRadius : 50, 0, 50, '%')}
+			            ${cstSlider('气泡最大宽度', 'chatBubbleMaxWidth', group.chatBubbleMaxWidth || 78, 50, 92, '%')}
+			            ${cstSlider('气泡水平留白', 'chatBubblePaddingX', group.chatBubblePaddingX || 12, 6, 28, 'px')}
+			            ${cstSlider('气泡垂直留白', 'chatBubblePaddingY', group.chatBubblePaddingY || 8, 4, 24, 'px')}
+			            ${cstSlider('列表左右留白', 'chatListPaddingX', group.chatListPaddingX || 16, 4, 32, 'px')}
+			            ${cstSlider('消息行距', 'chatMsgGap', group.chatMsgGap || 16, 2, 32, 'px')}
+			            ${cstSlider('头像纵向偏移', 'chatAvatarOffsetY', group.chatAvatarOffsetY || 0, -20, 20, 'px')}
+			            ${cstColor('我方气泡', 'myBubbleColor', group.myBubbleColor || '#EFFDDE')}
+			            ${cstColor('我方文字', 'myTextColor', group.myTextColor || '#000000')}
+			            ${cstColor('对方气泡', 'roleBubbleColor', group.roleBubbleColor || '#F6F7F9')}
+			            ${cstColor('对方文字', 'roleTextColor', group.roleTextColor || '#000000')}
+			            <div class="cst-actionrow" onclick="resetGroupChatLayout()">
+			                <span class="cst-actiontext">恢复默认群聊布局</span>
+			            </div>
+			        </div>
+
+			        <!-- 危险操作 -->
+			        <div class="cst-section">危险操作</div>
+			        <div class="cst-card">
+			            <div class="cst-actionrow" onclick="clearGroupChatHistory()">
+			                <span class="cst-actiontext danger">清空所有群聊记录</span>
+			            </div>
+			            <div class="cst-actionrow" onclick="deleteGroupChat()">
+			                <span class="cst-actiontext danger">解散并删除此群聊</span>
+			            </div>
+			        </div>
+			        <div class="cst-footnote" style="padding-bottom: 32px;">解散群聊将彻底抹除该群组与全部历史聊天记录，操作不可撤销。</div>
 			    `;
 			    container.innerHTML = html;
 			}
