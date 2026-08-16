@@ -7101,7 +7101,7 @@
 			    color: #007AFF;
 			    flex-shrink: 0;
 			}
-			.ims-back svg { width: 13px; height: 22px; stroke: #007AFF; stroke-width: 2.6; fill: none; }
+			.ims-back svg { width: 13px; height: 22px; stroke: currentColor; stroke-width: 2.6; fill: none; }
 			.ims-badge {
 			    display: none !important;
 			}
@@ -7175,6 +7175,9 @@
 			    font-size: 20px;
 			    padding: 0;
 			}
+			.ims-actbtn svg {
+			    stroke: currentColor;
+			}
 			.ims-actbtn:active { opacity: 0.4; }
 
 			/* 时间分隔行：小灰字，居中，「信息 · 短信」+ 时间 */
@@ -7203,7 +7206,8 @@
 			    border-radius: 19px !important;
 			    position: relative;
 			}
-			.bubble-style-ios.message-item.user .msg-bubble::after {
+			/* 默认 iOS 气泡尾巴 */
+			.bubble-style-ios .message-item.user .msg-bubble::after {
 			    content: '';
 			    position: absolute;
 			    right: -5px;
@@ -7214,8 +7218,8 @@
 			    border-bottom-left-radius: 14px;
 			    clip-path: path('M0 0 C0 10 4 16 14 16 C6 16 0 10 0 0 Z');
 			}
-			.bubble-style-ios.message-item.assistant .msg-bubble::after,
-			.bubble-style-ios.message-item.system .msg-bubble::after {
+			.bubble-style-ios .message-item.assistant .msg-bubble::after,
+			.bubble-style-ios .message-item.system .msg-bubble::after {
 			    content: '';
 			    position: absolute;
 			    left: -5px;
@@ -7636,7 +7640,7 @@
 			    display: flex;
 			    flex-direction: column;
 			    padding-top: 70px;
-			    padding-bottom: 100px;
+			    padding-bottom: calc(54px + env(safe-area-inset-bottom));
 			    position: relative;
 			    z-index: 1;
 			    -webkit-overflow-scrolling: touch;
@@ -7761,7 +7765,7 @@
 			    min-height: 0;
 			    overflow-y: auto;
 			    -webkit-overflow-scrolling: touch;
-			    padding-bottom: calc(env(safe-area-inset-bottom) + 80px);
+			    padding-bottom: calc(56px + env(safe-area-inset-bottom));
 			}
 
 			/* 原图不存在的组件：统计条 / 副标题 / 搜索框 / 分组条 / 拍立得 / 分区标题 / 脚注，全部移除 */
@@ -8179,7 +8183,7 @@
 			    overflow-y: auto;
 			    -webkit-overflow-scrolling: touch;
 			    background: #F2F2F7;
-			    padding-bottom: calc(env(safe-area-inset-bottom) + 80px);
+			    padding-bottom: calc(56px + env(safe-area-inset-bottom));
 			}
 
 			.imom-hero {
@@ -9697,7 +9701,7 @@
 			    overflow-y: auto;
 			    -webkit-overflow-scrolling: touch;
 			    background: #F2F2F7;
-			    padding-bottom: calc(env(safe-area-inset-bottom) + 80px);
+			    padding-bottom: calc(56px + env(safe-area-inset-bottom));
 			}
 			.iprof-largetitle {
 			    padding: 6px 20px 4px;
@@ -18127,7 +18131,7 @@
 			.message-list {
 			    flex: 1;
 			    overflow-y: auto;
-			    padding: 0 16px 100px 16px;
+			    padding: 0 16px calc(58px + env(safe-area-inset-bottom)) 16px;
 			    display: flex;
 			    flex-direction: column;
 			    gap: 16px;
@@ -19971,7 +19975,7 @@
 			    position: absolute;
 			    bottom: 0;
 			    width: 100%;
-			    padding: 10px 14px calc(12px + env(safe-area-inset-bottom)) 14px;
+			    padding: 6px 14px calc(6px + env(safe-area-inset-bottom)) 14px;
 			    display: flex;
 			    align-items: center;
 			    gap: 11px;
@@ -35059,23 +35063,23 @@ const displayName = isGroup ? chatData.name : (chatData.alias || chatData.name);
 
 			        $('#chat-room-header-normal').innerHTML = `
     <div class="ims-header ${headerNight ? 'night' : ''}">
-        <button class="ims-back" onclick="switchView('chat_main')">
+        <button class="ims-back" onclick="switchView('chat_main')" title="返回">
             <svg viewBox="0 0 13 22" stroke-linecap="round" stroke-linejoin="round">
                 <polyline points="10 2 3 11 10 20"></polyline>
             </svg>
         </button>
 
         <div class="ims-peer" onclick="${detailAction}">
-            <div class="ims-peer-ava">${peerAvaHtml}</div>
-            <div class="ims-peer-name">
+            <div class="ims-peer-ava msg-avatar">${peerAvaHtml}</div>
+            <div class="ims-peer-name" style="font-weight: 800;">
                 <span>${escapeHtml(displayName)}</span>
                 <iconify-icon icon="ph:caret-right-bold"></iconify-icon>
             </div>
         </div>
 
         <div class="ims-actions">
-            <button class="ims-actbtn" onclick="toggleChatStatusModal()" title="实时状态">
-                <iconify-icon icon="ph:info-bold"></iconify-icon>
+            <button class="ims-actbtn" onclick="${detailAction}" title="设置">
+                <iconify-icon icon="ph:sliders-horizontal-bold"></iconify-icon>
             </button>
         </div>
     </div>
